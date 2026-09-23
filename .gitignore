@@ -1,0 +1,12 @@
+build/
+*.vvp
+*.vcd
+*.fst
+*.out
+
+# GTKWave backup files (keep the .gtkw save files themselves - they're your
+# signal layouts and worth committing)
+*.gtkw~
+
+# local tool settings
+.claude/

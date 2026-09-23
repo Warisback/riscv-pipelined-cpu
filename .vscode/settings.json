@@ -1,0 +1,23 @@
+{
+  // Treat .sv/.svh as SystemVerilog
+  "files.associations": {
+    "*.sv": "systemverilog",
+    "*.svh": "systemverilog"
+  },
+
+  // Lint-as-you-type using Icarus. -g2012 = SystemVerilog-2012 subset.
+  // -y rtl  : auto-resolve any undefined module from rtl/<module>.sv
+  // -Y .sv  : tell -y to look for .sv (default is .v)
+  "verilog.linting.linter": "iverilog",
+  "verilog.linting.iverilog.arguments": "-g2012 -Wall -y . -y rtl -y tb -Y .sv -I . -I rtl",
+  "verilog.linting.iverilog.runAtFileLocation": false,
+
+  // svls is a separate Rust binary; leave off unless you install it
+  "verilog.languageServer.svls.enabled": false,
+
+  "[systemverilog]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.rulers": [100]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "cwd": "${workspaceFolder}",
+    "shell": {
+      "executable": "powershell.exe",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+    }
+  },
+  "presentation": {
+    "clear": true,
+    "panel": "shared",
+    "revealProblems": "onProblem"
+  },
+  "tasks": [
+    {
+      // Ctrl+Shift+B - runs the testbench file you currently have open
+      "label": "sim: current file",
+      "type": "shell",
+      "command": "./sim.ps1 '${relativeFile}'",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": {
+        "owner": "iverilog",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?):(\\d+):\\s*(?:(error|warning|sorry)\\s*:\\s*)?(.+)$",
+          "file": 1,
+          "line": 2,
+          "severity": 3,
+          "message": 4
+        }
+      }
+    },
+    {
+      "label": "sim + waves: current file",
+      "type": "shell",
+      "command": "./sim.ps1 '${relativeFile}' -Wave",
+      "problemMatcher": {
+        "owner": "iverilog",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?):(\\d+):\\s*(?:(error|warning|sorry)\\s*:\\s*)?(.+)$",
+          "file": 1,
+          "line": 2,
+          "severity": 3,
+          "message": 4
+        }
+      }
+    },
+    {
+      "label": "lint: current file",
+      "type": "shell",
+      "command": "./sim.ps1 '${relativeFile}' -Lint",
+      "problemMatcher": {
+        "owner": "iverilog",
+        "fileLocation": ["autoDetect", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?):(\\d+):\\s*(?:(error|warning|sorry)\\s*:\\s*)?(.+)$",
+          "file": 1,
+          "line": 2,
+          "severity": 3,
+          "message": 4
+        }
+      }
+    },
+    {
+      // Prompts for a tb name so you can run one without opening its file
+      "label": "sim + waves: pick testbench",
+      "type": "shell",
+      "command": "./sim.ps1 '${input:tbName}' -Wave",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "tbName",
+      "type": "promptString",
+      "description": "Testbench module name (e.g. immgen_tb)"
+    }
+  ]
+}
